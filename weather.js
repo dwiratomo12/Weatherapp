@@ -1,10 +1,10 @@
 const key = '4ea811ca97da5895b3c960fa98d08d80';
 
 //form search
-async function search() {
+function search() {
     const phrase = document.querySelector('input[type="text"]').value;
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${phrase}&limit=5&appid=${key}`);
-    const data = await response.json();
+    const response = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${phrase}&limit=5&appid=${key}`);
+    const data = response.json();
     const ul = document.querySelector('form ul');
     ul.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
@@ -23,9 +23,9 @@ const debouncedSearch = _.debounce(() => {
 }, 600);
 
 //mengambil api cuaca dan menampilkan cuaca
-async function showWeather(lat,lon,name) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
-    const data = await response.json();
+function showWeather(lat,lon,name) {
+    const response = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`);
+    const data = response.json();
     const temp = Math.round(data.main.temp);
     const feelsLike = Math.round(data.main.feels_like);
     const humidity = Math.round(data.main.humidity);
